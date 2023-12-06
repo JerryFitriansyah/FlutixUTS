@@ -54,7 +54,7 @@ class _MyCheckOutScreenState extends State<MyCheckOutScreen> {
                   child: Text(
                     '''Check details below before checkout''',
                     style: GoogleFonts.poppins(
-                      fontSize: 30,
+                      fontSize: 25,
                       fontWeight: FontWeight.w600,
                       color: Colors.black,
                     ),
@@ -91,7 +91,7 @@ class _MyCheckOutScreenState extends State<MyCheckOutScreen> {
                           padding: const EdgeInsets.all(8.0),
                           child: Text('Action, Adventure, Sci-fi, Fantasy',
                               style: GoogleFonts.poppins(
-                                fontSize: 12,
+                                fontSize: 10,
                                 fontWeight: FontWeight.w600,
                               )),
                         ),
@@ -102,34 +102,34 @@ class _MyCheckOutScreenState extends State<MyCheckOutScreen> {
                             children: [
                               const Icon(
                                 Icons.star_rounded,
-                                size: 20,
+                                size: 18,
                                 color: Colors.yellow,
                               ),
                               const Icon(
                                 Icons.star_rounded,
-                                size: 20,
+                                size: 18,
                                 color: Colors.yellow,
                               ),
                               const Icon(
                                 Icons.star_rounded,
-                                size: 20,
+                                size: 18,
                                 color: Colors.yellow,
                               ),
                               const Icon(
                                 Icons.star_rounded,
-                                size: 20,
+                                size: 18,
                                 color: Colors.yellow,
                               ),
                               const Icon(
                                 Icons.star_rounded,
-                                size: 20,
+                                size: 18,
                                 color: Colors.yellow,
                               ),
                               const SizedBox(width: 10),
                               Text(
                                 '3/5',
                                 style: GoogleFonts.poppins(
-                                    fontSize: 20, fontWeight: FontWeight.w600),
+                                    fontSize: 18, fontWeight: FontWeight.w600),
                               ),
                             ],
                           ),
@@ -157,7 +157,7 @@ class _MyCheckOutScreenState extends State<MyCheckOutScreen> {
                       Text(
                         'ID ORDER',
                         style: GoogleFonts.poppins(
-                          fontSize: 20,
+                          fontSize: 18,
                           fontWeight: FontWeight.w400,
                         ),
                       ),
@@ -165,7 +165,7 @@ class _MyCheckOutScreenState extends State<MyCheckOutScreen> {
                       Text(
                         '32452009302031',
                         style: GoogleFonts.poppins(
-                          fontSize: 20,
+                          fontSize: 18,
                           fontWeight: FontWeight.w400,
                         ),
                       ),
@@ -181,7 +181,7 @@ class _MyCheckOutScreenState extends State<MyCheckOutScreen> {
                       Text(
                         'Cinema',
                         style: GoogleFonts.poppins(
-                          fontSize: 20,
+                          fontSize: 18,
                           fontWeight: FontWeight.w400,
                         ),
                       ),
@@ -189,7 +189,7 @@ class _MyCheckOutScreenState extends State<MyCheckOutScreen> {
                       Text(
                         'Smarinda Central Plaza',
                         style: GoogleFonts.poppins(
-                          fontSize: 20,
+                          fontSize: 18,
                           fontWeight: FontWeight.w400,
                         ),
                       ),
@@ -229,7 +229,7 @@ class _MyCheckOutScreenState extends State<MyCheckOutScreen> {
                       Text(
                         'Seats',
                         style: GoogleFonts.poppins(
-                          fontSize: 20,
+                          fontSize: 18,
                           fontWeight: FontWeight.w400,
                         ),
                       ),
@@ -237,7 +237,7 @@ class _MyCheckOutScreenState extends State<MyCheckOutScreen> {
                       Text(
                         'A1, A2',
                         style: GoogleFonts.poppins(
-                          fontSize: 20,
+                          fontSize: 18,
                           fontWeight: FontWeight.w400,
                         ),
                       ),
@@ -253,7 +253,7 @@ class _MyCheckOutScreenState extends State<MyCheckOutScreen> {
                       Text(
                         '2 Tickets',
                         style: GoogleFonts.poppins(
-                          fontSize: 20,
+                          fontSize: 18,
                           fontWeight: FontWeight.w400,
                         ),
                       ),
@@ -261,7 +261,7 @@ class _MyCheckOutScreenState extends State<MyCheckOutScreen> {
                       Text(
                         'Rp. 50.000 x 2',
                         style: GoogleFonts.poppins(
-                          fontSize: 20,
+                          fontSize: 18,
                           fontWeight: FontWeight.w400,
                         ),
                       ),
@@ -277,7 +277,7 @@ class _MyCheckOutScreenState extends State<MyCheckOutScreen> {
                       Text(
                         'Fees',
                         style: GoogleFonts.poppins(
-                          fontSize: 20,
+                          fontSize: 18,
                           fontWeight: FontWeight.w400,
                         ),
                       ),
@@ -285,7 +285,7 @@ class _MyCheckOutScreenState extends State<MyCheckOutScreen> {
                       Text(
                         'Rp. 50.000',
                         style: GoogleFonts.poppins(
-                          fontSize: 20,
+                          fontSize: 18,
                           fontWeight: FontWeight.w400,
                         ),
                       ),
@@ -301,7 +301,7 @@ class _MyCheckOutScreenState extends State<MyCheckOutScreen> {
                       Text(
                         'Total',
                         style: GoogleFonts.poppins(
-                          fontSize: 20,
+                          fontSize: 18,
                           fontWeight: FontWeight.w400,
                         ),
                       ),
@@ -309,7 +309,7 @@ class _MyCheckOutScreenState extends State<MyCheckOutScreen> {
                       Text(
                         'Rp. 120.000',
                         style: GoogleFonts.poppins(
-                          fontSize: 20,
+                          fontSize: 18,
                           fontWeight: FontWeight.w400,
                         ),
                       ),
@@ -332,7 +332,7 @@ class _MyCheckOutScreenState extends State<MyCheckOutScreen> {
                       Text(
                         'Failed Checkout',
                         style: GoogleFonts.poppins(
-                          fontSize: 20,
+                          fontSize: 18,
                           fontWeight: FontWeight.w400,
                           color: Colors.red,
                         ),
@@ -341,7 +341,7 @@ class _MyCheckOutScreenState extends State<MyCheckOutScreen> {
                       Text(
                         'Rp. 30.000',
                         style: GoogleFonts.poppins(
-                          fontSize: 20,
+                          fontSize: 18,
                           fontWeight: FontWeight.w400,
                           color: Colors.red,
                         ),
@@ -358,7 +358,7 @@ class _MyCheckOutScreenState extends State<MyCheckOutScreen> {
                       Text(
                         'Check Out Now',
                         style: GoogleFonts.poppins(
-                          fontSize: 30,
+                          fontSize: 25,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
@@ -367,7 +367,7 @@ class _MyCheckOutScreenState extends State<MyCheckOutScreen> {
                           onPressed: () {},
                           icon: const Icon(
                             Icons.arrow_circle_right_outlined,
-                            size: 70,
+                            size: 65,
                             color: Colors.red,
                           ))
                     ],

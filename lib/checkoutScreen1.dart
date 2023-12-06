@@ -53,13 +53,13 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Text(
                     '''Check details below before checkout''',
                     style: GoogleFonts.poppins(
-                      fontSize: 30,
+                      fontSize: 18
                       fontWeight: FontWeight.w600,
                       color: Colors.black,
                     ),
                   ),
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 8),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -82,7 +82,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           padding: const EdgeInsets.all(8.0),
                           child: Text('Justice League',
                               style: GoogleFonts.poppins(
-                                fontSize: 25,
+                                fontSize: 18
                                 fontWeight: FontWeight.w600,
                               )),
                         ),
@@ -90,7 +90,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           padding: const EdgeInsets.all(8.0),
                           child: Text('Action, Adventure, Sci-fi, Fantasy',
                               style: GoogleFonts.poppins(
-                                fontSize: 12,
+                                fontSize: 10,
                                 fontWeight: FontWeight.w600,
                               )),
                         ),
@@ -101,34 +101,34 @@ class _MyHomePageState extends State<MyHomePage> {
                             children: [
                               const Icon(
                                 Icons.star_rounded,
-                                size: 20,
+                                size: 18,
                                 color: Colors.yellow,
                               ),
                               const Icon(
                                 Icons.star_rounded,
-                                size: 20,
+                                size: 18,
                                 color: Colors.yellow,
                               ),
                               const Icon(
                                 Icons.star_rounded,
-                                size: 20,
+                                size: 18,
                                 color: Colors.yellow,
                               ),
                               const Icon(
                                 Icons.star_rounded,
-                                size: 20,
+                                size: 18,
                                 color: Colors.yellow,
                               ),
                               const Icon(
                                 Icons.star_rounded,
-                                size: 20,
+                                size: 18,
                                 color: Colors.yellow,
                               ),
                               const SizedBox(width: 10),
                               Text(
                                 '3/5',
                                 style: GoogleFonts.poppins(
-                                    fontSize: 20, fontWeight: FontWeight.w600),
+                                    fontSize: 18, fontWeight: FontWeight.w600),
                               ),
                             ],
                           ),
@@ -156,7 +156,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       Text(
                         'ID ORDER',
                         style: GoogleFonts.poppins(
-                          fontSize: 20,
+                          fontSize: 18,
                           fontWeight: FontWeight.w400,
                         ),
                       ),
@@ -164,7 +164,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       Text(
                         '32452009302031',
                         style: GoogleFonts.poppins(
-                          fontSize: 20,
+                          fontSize: 18,
                           fontWeight: FontWeight.w400,
                         ),
                       ),
@@ -180,7 +180,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       Text(
                         'Cinema',
                         style: GoogleFonts.poppins(
-                          fontSize: 20,
+                          fontSize: 18,
                           fontWeight: FontWeight.w400,
                         ),
                       ),
@@ -188,7 +188,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       Text(
                         'Smarinda Central Plaza',
                         style: GoogleFonts.poppins(
-                          fontSize: 20,
+                          fontSize: 18,
                           fontWeight: FontWeight.w400,
                         ),
                       ),
@@ -204,7 +204,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       Text(
                         'Date & Time',
                         style: GoogleFonts.poppins(
-                          fontSize: 20,
+                          fontSize: 18
                           fontWeight: FontWeight.w400,
                         ),
                       ),
@@ -212,7 +212,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       Text(
                         'Monday 18, 22.00',
                         style: GoogleFonts.poppins(
-                          fontSize: 20,
+                          fontSize: 18,
                           fontWeight: FontWeight.w400,
                         ),
                       ),
@@ -228,7 +228,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       Text(
                         'Seats',
                         style: GoogleFonts.poppins(
-                          fontSize: 20,
+                          fontSize: 18
                           fontWeight: FontWeight.w400,
                         ),
                       ),
@@ -236,7 +236,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       Text(
                         'A1, A2',
                         style: GoogleFonts.poppins(
-                          fontSize: 20,
+                          fontSize: 18
                           fontWeight: FontWeight.w400,
                         ),
                       ),
@@ -252,7 +252,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       Text(
                         '2 Tickets',
                         style: GoogleFonts.poppins(
-                          fontSize: 20,
+                          fontSize: 18
                           fontWeight: FontWeight.w400,
                         ),
                       ),
@@ -260,7 +260,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       Text(
                         'Rp. 50.000 x 2',
                         style: GoogleFonts.poppins(
-                          fontSize: 20,
+                          fontSize: 18
                           fontWeight: FontWeight.w400,
                         ),
                       ),
@@ -276,7 +276,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       Text(
                         'Fees',
                         style: GoogleFonts.poppins(
-                          fontSize: 20,
+                          fontSize: 18
                           fontWeight: FontWeight.w400,
                         ),
                       ),
@@ -284,7 +284,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       Text(
                         'Rp. 50.000',
                         style: GoogleFonts.poppins(
-                          fontSize: 20,
+                          fontSize: 18
                           fontWeight: FontWeight.w400,
                         ),
                       ),
@@ -300,7 +300,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       Text(
                         'Total',
                         style: GoogleFonts.poppins(
-                          fontSize: 20,
+                          fontSize: 18
                           fontWeight: FontWeight.w400,
                         ),
                       ),
@@ -308,7 +308,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       Text(
                         'Rp. 120.000',
                         style: GoogleFonts.poppins(
-                          fontSize: 20,
+                          fontSize: 18
                           fontWeight: FontWeight.w400,
                         ),
                       ),
@@ -331,7 +331,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       Text(
                         'Success Checkout',
                         style: GoogleFonts.poppins(
-                          fontSize: 20,
+                          fontSize: 18
                           fontWeight: FontWeight.w400,
                         ),
                       ),
@@ -339,7 +339,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       Text(
                         'Rp. 250.000',
                         style: GoogleFonts.poppins(
-                          fontSize: 20,
+                          fontSize: 18
                           fontWeight: FontWeight.w400,
                         ),
                       ),
@@ -355,7 +355,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       Text(
                         'Check Out Now',
                         style: GoogleFonts.poppins(
-                          fontSize: 30,
+                          fontSize: 25,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
@@ -364,7 +364,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           onPressed: () {},
                           icon: const Icon(
                             Icons.arrow_circle_right_outlined,
-                            size: 70,
+                            size: 65,
                             color: Colors.green,
                           ))
                     ],
