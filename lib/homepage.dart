@@ -1,4 +1,8 @@
+import 'package:flutix_uts/models/models.dart';
 import 'package:flutix_uts/moviedetail.dart';
+import 'package:flutix_uts/services/services.dart';
+import 'package:flutix_uts/widgets/moviecomingposter.dart';
+import 'package:flutix_uts/widgets/movieposter.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -14,6 +18,8 @@ class _homepageState extends State<homepage> {
 
   @override
   Widget build(BuildContext context) {
+    Future<List<Movie>> nowPlaying = Api.getMovies('now_playing', 4);
+    Future<List<Movie>> comingSoon = Api.getMovies('upcoming', 4);
     return Scaffold(
       body: ListView(children: [
         Column(children: [
@@ -61,26 +67,34 @@ class _homepageState extends State<homepage> {
                 style: GoogleFonts.raleway(
                     fontSize: 18, fontWeight: FontWeight.bold),
               ),
-              GestureDetector(
-                onTap: (){
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (context) => moviedetails()));
-                },
-                child: Container(
-                  height: 120.0,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: 10,
-                    itemBuilder: (context, index) {
-                      return Container(
-                        width: 180,
-                        margin: EdgeInsets.only(top: 8.0, right: 15.0),
-                        color: Colors.grey,
+              FutureBuilder<List<Movie>>(
+                  future: nowPlaying,
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const CircularProgressIndicator(
+                        color: Color.fromARGB(255, 247, 234, 60),
                       );
-                    },
-                  ),
-                ),
-              ),
+                    } else if (snapshot.hasData) {
+                      final movies = snapshot.data!;
+                      return Container(
+                        height: 156,
+                        padding: const EdgeInsets.only(left: 20),
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (_, i) {
+                            return MoviePoster(
+                              //nama widget
+                              movie: movies[i], //movies[i].nama dls
+                            );
+                            // .noRate();
+                          },
+                          itemCount: movies.length,
+                        ),
+                      );
+                    } else {
+                      return const Text("there is no data");
+                    }
+                  }),
               SizedBox(height: 10),
               Text(
                 "Movie Category",
@@ -113,25 +127,42 @@ class _homepageState extends State<homepage> {
                 style: GoogleFonts.raleway(
                     fontSize: 18, fontWeight: FontWeight.bold),
               ),
-              Container(
-                height: 180.0,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 10,
-                  itemBuilder: (context, index) {
-                    return Container(
-                      width: 150,
-                      margin: EdgeInsets.only(top: 8.0, right: 15.0),
-                      color: Colors.grey,
+              FutureBuilder<List<Movie>>(
+                future: comingSoon,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const CircularProgressIndicator(
+                      color: Color.fromARGB(255, 247, 234, 60),
                     );
-                  },
-                ),
+                  } else if (snapshot.hasData) {
+                    final movies = snapshot.data!;
+                    return Container(
+                      height: 200,
+                      padding: const EdgeInsets.only(left: 20),
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (_, i) {
+                          return MovieComingPoster(
+                            movie: movies[i],
+                          );
+                        },
+                        itemCount: movies.length,
+                      ),
+                    );
+                  } else {
+                    return const Text("There is no data");
+                  }
+                },
               ),
               SizedBox(height: 20),
             ]),
           ),
           Center(
-            child: Container(width: 280, height: 90, color: Colors.grey),
+            child: Container(
+              width: 280,
+              height: 90,
+              color: Colors.grey
+            ),
           )
         ]),
       ]),

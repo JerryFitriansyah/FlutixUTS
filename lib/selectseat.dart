@@ -1,14 +1,58 @@
+import 'package:flutix_uts/checkoutScreen1.dart';
+import 'package:flutix_uts/models/models.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class selectseat extends StatefulWidget {
-  selectseat({super.key});
+  
+    Movie movies;
+
+  selectseat({super.key, required this.movies});
 
   @override
   State<selectseat> createState() => _selectseatState();
 }
 
+Color kSeatBookedColor = Color.fromARGB(255, 111, 11, 225);
+Color kSeatSelectedColor = Color.fromARGB(255, 247, 234, 60);
+
 class _selectseatState extends State<selectseat> {
+  List<List<bool>> seatStatus =
+      List.generate(8, (index) => List.filled(6, false));
+  List<String> selectedSeats = [];
+
+  Widget buildSeatContainer(String seatText, int row, int col) {
+    return InkWell(
+      onTap: () {
+        setState(() {
+          seatStatus[row][col] = !seatStatus[row][col];
+        });
+      },
+      child: Container(
+        width: 40,
+        height: 40,
+        margin: EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+        decoration: BoxDecoration(
+          color: seatStatus[row][col] ? kSeatSelectedColor : Colors.white,
+          border: Border.all(color: Color.fromARGB(255, 247, 234, 60), width: 1),
+          borderRadius: BorderRadius.circular(4),
+        ),
+        child: Align(
+          alignment: Alignment.center,
+          child: Text(seatText),
+        ),
+      ),
+    );
+  }
+
+    List<Widget> buildSeatRow(String rowName, int row) {
+    List<Widget> rowWidgets = List.generate(6, (col) {
+      final seatText = "$rowName${6 - col}";
+      return buildSeatContainer(seatText, row, col);
+    });
+    return rowWidgets;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,150 +93,19 @@ class _selectseatState extends State<selectseat> {
                     fontSize: 14, fontWeight: FontWeight.normal),
               ),
             ),
-            SizedBox(height: 10),
-            Container(
-              height: 50.0,
-              width: 320.0,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: 6,
-                itemBuilder: (context, index) {
-                  return Container(
-                    width: 30,
-                    margin: EdgeInsets.only(left: 20.0, top: 10.0),
-                    decoration: BoxDecoration(
-                      color: Colors.grey,
-                    ),
-                  );
-                },
+            Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: List.generate(
+              8,
+              (index) => Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: buildSeatRow(
+                  String.fromCharCode('H'.codeUnitAt(0) - index),
+                  index,
+                ),
               ),
             ),
-            SizedBox(height: 10),
-            Container(
-              height: 50.0,
-              width: 320.0,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: 6,
-                itemBuilder: (context, index) {
-                  return Container(
-                    width: 30,
-                    margin: EdgeInsets.only(left: 20.0, top: 10.0),
-                    decoration: BoxDecoration(
-                      color: Colors.grey,
-                    ),
-                  );
-                },
-              ),
-            ),
-            SizedBox(height: 10),
-            Container(
-              height: 50.0,
-              width: 320.0,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: 6,
-                itemBuilder: (context, index) {
-                  return Container(
-                    width: 30,
-                    margin: EdgeInsets.only(left: 20.0, top: 10.0),
-                    decoration: BoxDecoration(
-                      color: Colors.grey,
-                    ),
-                  );
-                },
-              ),
-            ),
-            SizedBox(height: 10),
-            Container(
-              height: 50.0,
-              width: 320.0,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: 6,
-                itemBuilder: (context, index) {
-                  return Container(
-                    width: 30,
-                    margin: EdgeInsets.only(left: 20.0, top: 10.0),
-                    decoration: BoxDecoration(
-                      color: Colors.grey,
-                    ),
-                  );
-                },
-              ),
-            ),
-            SizedBox(height: 10),
-            Container(
-              height: 50.0,
-              width: 320.0,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: 6,
-                itemBuilder: (context, index) {
-                  return Container(
-                    width: 30,
-                    margin: EdgeInsets.only(left: 20.0, top: 10.0),
-                    decoration: BoxDecoration(
-                      color: Colors.grey,
-                    ),
-                  );
-                },
-              ),
-            ),
-            SizedBox(height: 10),
-            Container(
-              height: 50.0,
-              width: 320.0,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: 6,
-                itemBuilder: (context, index) {
-                  return Container(
-                    width: 30,
-                    margin: EdgeInsets.only(left: 20.0, top: 10.0),
-                    decoration: BoxDecoration(
-                      color: Colors.grey,
-                    ),
-                  );
-                },
-              ),
-            ),
-            SizedBox(height: 10),
-            Container(
-              height: 50.0,
-              width: 320.0,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: 6,
-                itemBuilder: (context, index) {
-                  return Container(
-                    width: 30,
-                    margin: EdgeInsets.only(left: 20.0, top: 10.0),
-                    decoration: BoxDecoration(
-                      color: Colors.grey,
-                    ),
-                  );
-                },
-              ),
-            ),
-            SizedBox(height: 10),
-            Container(
-              height: 50.0,
-              width: 320.0,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: 6,
-                itemBuilder: (context, index) {
-                  return Container(
-                    width: 30,
-                    margin: EdgeInsets.only(left: 20.0, top: 10.0),
-                    decoration: BoxDecoration(
-                      color: Colors.grey,
-                    ),
-                  );
-                },
-              ),
-            ),
+          ),
             SizedBox(height: 20,),
             Row(
             children: [
@@ -204,7 +117,7 @@ class _selectseatState extends State<selectseat> {
                     margin: EdgeInsets.only(left: 50, right: 10, top: 10),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(4),
-                      color: Color.fromARGB(255, 247, 234, 60),
+                      color: Color.fromARGB(255, 111, 11, 225),
                     ),
                   ),
                   Container(
@@ -244,7 +157,7 @@ class _selectseatState extends State<selectseat> {
                     height: 20,
                     margin: EdgeInsets.only(left: 10, top: 10),
                     decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 111, 11, 225),
+                      color: Color.fromARGB(255, 247, 234, 60),
                       borderRadius: BorderRadius.circular(4),
                     ),
                   ),
@@ -274,7 +187,8 @@ class _selectseatState extends State<selectseat> {
               ),
               GestureDetector(
                 onTap: () {
-                  
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (context) => checkoutScreen1(movies: widget.movies)));
                 },
                 child: Padding(
                   padding: const EdgeInsets.only(
