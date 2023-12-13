@@ -1,5 +1,7 @@
+import 'package:flutix_uts/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class flutixconfirm extends StatefulWidget {
   flutixconfirm({super.key});
@@ -13,20 +15,20 @@ class _flutixconfirmState extends State<flutixconfirm> {
   String email = '';
 
   @override
-  // void initState() {
-  //   super.initState();
-  //   loadNama(); // Memuat nama saat halaman dimuat
-  // }
+  void initState() {
+    super.initState();
+    loadNama(); // Memuat nama saat halaman dimuat
+  }
 
-  // Future<void> loadNama() async {
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   setState(() {
-  //     username = prefs.getString('nama') ??
-  //         ""; // Mendapatkan nama dari SharedPreferences
-  //     email = prefs.getString('email') ??
-  //         ""; // Mendapatkan nama dari SharedPreferences
-  //   });
-  // }
+  Future<void> loadNama() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      username = prefs.getString('nama') ??
+          ""; // Mendapatkan nama dari SharedPreferences
+      email = prefs.getString('email') ??
+          ""; // Mendapatkan nama dari SharedPreferences
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -99,7 +101,7 @@ class _flutixconfirmState extends State<flutixconfirm> {
                 Padding(
                   padding: const EdgeInsets.only(top: 10),
                   child: Text(
-                    "NANTI ISINYA USERNAME",
+                    username ?? "Loading...",
                     style: GoogleFonts.raleway(
                       fontSize: 20,
                       color: Colors.black,
@@ -124,8 +126,8 @@ class _flutixconfirmState extends State<flutixconfirm> {
               ),
               GestureDetector(
                 onTap: () {
-                  // Navigator.of(context)
-                  //     .push(MaterialPageRoute(builder: (context) => uprof()));
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (context) => homepage()));
                 },
                 child: Padding(
                   padding: const EdgeInsets.only(left: 140, right: 20, top: 100, bottom: 40),

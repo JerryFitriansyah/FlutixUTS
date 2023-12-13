@@ -1,431 +1,249 @@
-import 'package:flutter/material.dart';
+// ignore_for_file: camel_case_types, prefer_const_constructors, prefer_const_literals_to_create_immutables
 
-class TopUpMenu extends StatelessWidget {
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutix_uts/succestopup.dart';
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
+
+class topupmenu extends StatefulWidget {
+  const topupmenu({Key? key}) : super(key: key);
+
+  @override
+  State<topupmenu> createState() => _topupmenuState();
+}
+
+// Membuat objek Timestamp
+Timestamp timestamp = Timestamp.now();
+
+// Mengonversi Timestamp menjadi DateTime
+DateTime dateTime = timestamp.toDate();
+
+// Memformat DateTime menjadi string sesuai kebutuhan
+String formattedDate = DateFormat('MMMM d, y h:mm:ss a').format(dateTime);
+
+// class topupmenu{
+//   int harga;
+
+//   topupmenu(this.harga);
+// }
+
+// List<topupmenu> TopUp =[
+
+// ]
+
+class _topupmenuState extends State<topupmenu> {
+  TextEditingController _controller = TextEditingController();
+  int currentBalance = 0;
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          width: 360,
-          height: 640,
-          clipBehavior: Clip.antiAlias,
-          decoration: BoxDecoration(color: Colors.white),
-          child: Stack(
+    var lebar = MediaQuery.of(context).size.width;
+    List<String> template = [
+      "50.000",
+      "100.000",
+      "150.000",
+      "200.000",
+      "500.000",
+      "1.000.000"
+    ];
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 20.0, top: 10.0),
+          child: InkWell(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: Icon(
+              Icons.arrow_back_rounded,
+              color: Color.fromARGB(255, 111, 11, 225),
+              size: 32,
+            ),
+          ),
+        ),
+        title: Padding(
+          padding: const EdgeInsets.only(top: 10.0),
+          child: Text(
+            "Top Up",
+            style: GoogleFonts.raleway(
+                color: Colors.black, fontWeight: FontWeight.bold, fontSize: 20),
+          ),
+        ),
+      ),
+      body: ListView(
+        children: [
+          Column(
             children: [
-              Positioned(
-                left: 22,
-                top: 174,
-                child: Text(
-                  'Choose by template',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 20,
-                    fontFamily: 'Raleway',
-                    fontWeight: FontWeight.w400,
-                    height: 0,
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 23,
-                top: 32,
-                child: Container(
-                  width: 30,
-                  height: 30,
-                  padding: const EdgeInsets.symmetric(horizontal: 2.50, vertical: 4.38),
-                  clipBehavior: Clip.antiAlias,
-                  decoration: BoxDecoration(),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                    
-                    ],
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 20,
-                top: 238,
-                child: Container(
-                  width: 125,
-                  height: 80,
-                  child: Stack(
-                    children: [
-                      Positioned(
-                        left: 0,
-                        top: 0,
-                        child: Container(
-                          width: 125,
-                          height: 80,
-                          decoration: ShapeDecoration(
-                            color: Color(0xFFD9D9D9),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(2)),
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        left: 29,
-                        top: 26,
-                        child: Text(
-                          'IDR 50.000',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 16,
-                            fontFamily: 'Oswald',
-                            fontWeight: FontWeight.w300,
-                            height: 0,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 215,
-                top: 238,
-                child: Container(
-                  width: 125,
-                  height: 80,
-                  child: Stack(
-                    children: [
-                      Positioned(
-                        left: 0,
-                        top: 0,
-                        child: Container(
-                          width: 125,
-                          height: 80,
-                          decoration: ShapeDecoration(
-                            color: Color(0xFFD9D9D9),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(2)),
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        left: 26,
-                        top: 26,
-                        child: Text(
-                          'IDR 100.000',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 16,
-                            fontFamily: 'Oswald',
-                            fontWeight: FontWeight.w300,
-                            height: 0,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 20,
-                top: 339,
-                child: Container(
-                  width: 125,
-                  height: 80,
-                  child: Stack(
-                    children: [
-                      Positioned(
-                        left: 0,
-                        top: 0,
-                        child: Container(
-                          width: 125,
-                          height: 80,
-                          decoration: ShapeDecoration(
-                            color: Color(0xFFD9D9D9),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(2)),
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        left: 30,
-                        top: 28,
-                        child: Text(
-                          'IDR 200.000',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 16,
-                            fontFamily: 'Oswald',
-                            fontWeight: FontWeight.w300,
-                            height: 0,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 215,
-                top: 339,
-                child: Container(
-                  width: 125,
-                  height: 80,
-                  child: Stack(
-                    children: [
-                      Positioned(
-                        left: 0,
-                        top: 0,
-                        child: Container(
-                          width: 125,
-                          height: 80,
-                          decoration: ShapeDecoration(
-                            color: Color(0xFFD9D9D9),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(2)),
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        left: 25,
-                        top: 28,
-                        child: Text(
-                          'IDR 300.000',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 16,
-                            fontFamily: 'Oswald',
-                            fontWeight: FontWeight.w300,
-                            height: 0,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 20,
-                top: 440,
-                child: Container(
-                  width: 125,
-                  height: 80,
-                  child: Stack(
-                    children: [
-                      Positioned(
-                        left: 0,
-                        top: 0,
-                        child: Container(
-                          width: 125,
-                          height: 80,
-                          decoration: ShapeDecoration(
-                            color: Color(0xFFD9D9D9),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(2)),
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        left: 25,
-                        top: 31,
-                        child: Text(
-                          'IDR 500.000',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 16,
-                            fontFamily: 'Oswald',
-                            fontWeight: FontWeight.w300,
-                            height: 0,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 215,
-                top: 440,
-                child: Container(
-                  width: 125,
-                  height: 80,
-                  child: Stack(
-                    children: [
-                      Positioned(
-                        left: 0,
-                        top: 0,
-                        child: Container(
-                          width: 125,
-                          height: 80,
-                          decoration: ShapeDecoration(
-                            color: Color(0xFFD9D9D9),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(2)),
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        left: 20,
-                        top: 31,
-                        child: Text(
-                          'IDR 1.000.000',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 16,
-                            fontFamily: 'Oswald',
-                            fontWeight: FontWeight.w300,
-                            height: 0,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 18,
-                top: 122,
-                child: Container(
-                  width: 312,
-                  height: 38,
-                  decoration: ShapeDecoration(
-                    color: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      side: BorderSide(width: 1, color: Color(0xFFB4B1B1)),
-                      borderRadius: BorderRadius.circular(8),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Amount",
+                      style: GoogleFonts.raleway(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 16),
                     ),
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 28,
-                top: 129,
-                child: Opacity(
-                  opacity: 0.50,
-                  child: Text(
-                    'IDR',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
-                      fontFamily: 'Oswald',
-                      fontWeight: FontWeight.w200,
-                      height: 0,
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 1),
+                      child: TextField(
+                        controller: _controller,
+                        style: TextStyle(color: Colors.black),
+                        onChanged: (value) {},
+                        decoration: InputDecoration(
+                            filled: true,
+                            fillColor: Colors.white,
+                            labelText: "IDR",
+                            enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                              color: Color.fromARGB(255, 208, 165, 203),
+                              width: 1,
+                            )),
+                            contentPadding: EdgeInsets.symmetric(
+                                vertical: 20, horizontal: 10),
+                            labelStyle: GoogleFonts.raleway(
+                              color: Colors.grey,
+                            )),
+                      ),
                     ),
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 22,
-                top: 97,
-                child: Text(
-                  'Amount',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 20,
-                    fontFamily: 'Raleway',
-                    fontWeight: FontWeight.w400,
-                    height: 0,
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 145,
-                top: 35,
-                child: Text(
-                  'Top Up',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 20,
-                    fontFamily: 'Raleway',
-                    fontWeight: FontWeight.w400,
-                    height: 0,
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 65,
-                top: 550,
-                child: Container(
-                  width: 230,
-                  height: 40,
-                  clipBehavior: Clip.antiAlias,
-                  decoration: ShapeDecoration(
-                    color: Color(0xFF6750A4),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(100),
+                    Padding(
+                      padding: EdgeInsets.only(top: 30, bottom: 10),
+                      child: Text(
+                        "Choose by template",
+                        style: GoogleFonts.raleway(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 16),
+                      ),
                     ),
-                  ),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        child: Container(
-                          width: double.infinity,
-                          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                'Top Up Now',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 14,
-                                  fontFamily: 'Raleway',
-                                  fontWeight: FontWeight.w500,
-                                  height: 0.10,
-                                  letterSpacing: 0.10,
-                                ),
+                    SizedBox(
+                      height: 350, // Adjust the height based on your needs
+                      child: GridView.builder(
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 8.0,
+                          mainAxisSpacing: 8.0,
+                        ),
+                        itemCount: template.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return GestureDetector(
+                            onTap: () {
+                              _controller.text = template[index];
+                            },
+                            child: Container(
+                              height: 20,
+                              width: 20,
+                              decoration: BoxDecoration(
+                                color: _controller.text == template[index]
+                                    ? Colors.black
+                                    : Colors.grey,
+                                borderRadius: BorderRadius.circular(5),
                               ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 0,
-                top: 0,
-                child: Container(
-                  width: 360,
-                  height: 22.90,
-                  child: Stack(
-                    children: [
-                      Positioned(
-                        left: 0,
-                        top: 0,
-                        child: Opacity(
-                          opacity: 0.30,
-                          child: Container(
-                            width: 360,
-                            height: 22.90,
-                            decoration: BoxDecoration(color: Color(0xFFAA9D9D)),
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        left: 295.80,
-                        top: 6.15,
-                        child: SizedBox(
-                          width: 39.51,
-                          height: 11.41,
-                          child: Text(
-                            '16:20',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 16,
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.w500,
-                              height: 0.09,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "IDR",
+                                    style: GoogleFonts.raleway(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                  Text(
+                                    template[index],
+                                    style: GoogleFonts.raleway(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
+                          );
+                        },
+                      ),
+                    ),
+                    SizedBox(
+                      height: 40,
+                    ),
+                    Align(
+                      alignment: Alignment.center,
+                      child: ElevatedButton(
+                        onPressed: () async {
+                          int templateValue = int.tryParse(
+                                  _controller.text.replaceAll(".", "")) ??
+                              0;
+                          int newTopUpAmount = templateValue;
+
+                          CollectionReference usersCollection =
+                              FirebaseFirestore.instance.collection('users');
+
+                          String id = FirebaseAuth.instance.currentUser!.uid;
+
+                          DocumentSnapshot userSnapshot =
+                              await usersCollection.doc(id).get();
+                          int currentBalance = userSnapshot.get('saldo');
+
+                          int updatedBalance = currentBalance + newTopUpAmount;
+
+                          await usersCollection
+                              .doc(id)
+                              .update({'saldo': updatedBalance});
+
+                          setState(() {
+                            currentBalance = updatedBalance;
+
+                            CollectionReference historiTopupCollection =
+                                FirebaseFirestore.instance
+                                    .collection('historyTopup');
+                            Map<String, dynamic> checkoutTopup = {
+                              'idCust': id,
+                              'waktu': formattedDate,
+                              'saldoTopUp': templateValue,
+                            };
+                            historiTopupCollection.add(checkoutTopup);
+                          });
+
+                          print("New Balance: $currentBalance");
+
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => succestopup(),
+                            ),
+                          );
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Color.fromARGB(255, 111, 11, 225),
+                          foregroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          minimumSize: Size(200, 50),
+                        ),
+                        child: Text(
+                          "Top Up My Wallet",
+                          style: GoogleFonts.raleway(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
-                    ],
-                  ),
+                    )
+                  ],
                 ),
               ),
             ],
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

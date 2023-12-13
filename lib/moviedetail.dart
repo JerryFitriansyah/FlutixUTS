@@ -8,7 +8,8 @@ import 'package:flutter/material.dart';
 
 class movie_details extends StatelessWidget {
   Movie movie;
-  movie_details({super.key, required this.movie});
+  int? saldo;
+  movie_details({super.key, required this.movie, required this.saldo});
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +31,7 @@ class movie_details extends StatelessWidget {
                   final movies = snapshot.data!;
                   return MovieDetails(
                     movie: movies.first,
+                    saldo: saldo,
                   );
                 } else if (snapshot.hasError) {
                   return Text("Error: ${snapshot.error}");

@@ -1,5 +1,7 @@
 // ignore_for_file: camel_case_types, prefer_const_constructors, file_names
 
+import 'package:flutix_uts/homepage.dart';
+import 'package:flutix_uts/mywallet.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -56,11 +58,11 @@ class _succestopupState extends State<succestopup> {
           SizedBox(height: 50),
           ElevatedButton(
             onPressed: () {
-              // Navigator.of(context).push(
-              //   MaterialPageRoute(
-              //     builder: (context) => flutixsignin(),
-              //   ),
-              // );
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => myWallet(),
+                ),
+              );
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: Color.fromARGB(255, 111, 11, 225),
@@ -85,8 +87,8 @@ class _succestopupState extends State<succestopup> {
             children: [
               GestureDetector(
                 onTap: () {
-                  // Navigator.of(context)
-                  //     .push(MaterialPageRoute(builder: (context) => flutixsignup()));
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (context) => homepage()));
                 },
                 child: Text(
                   "Back To Home",

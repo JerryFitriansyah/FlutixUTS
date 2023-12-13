@@ -1,5 +1,7 @@
 // ignore_for_file: camel_case_types, prefer_const_constructors, use_build_context_synchronously
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutix_uts/auth/auth.dart';
 import 'package:flutix_uts/flutixgenre.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -30,11 +32,11 @@ class _flutixsignupState extends State<flutixsignup> {
 
       try {
         // // Registrasi pengguna
-        // await Auth().regis(email, password, nama);
+        await Auth().regis(email, password, nama, 200000);
 
-        // Navigator.of(context).push(
-        //   MaterialPageRoute(builder: (context) => confir()),
-        // );
+        Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => flutixgenre()),
+        );
       } catch (error) {
         // Tangani kesalahan yang mungkin terjadi saat registrasi
         print('Error during registration: $error');
@@ -262,7 +264,16 @@ class _flutixsignupState extends State<flutixsignup> {
                       ),
                     ),
                     GestureDetector(
-                      onTap: () {
+                      onTap: () async {
+                        handleSubmit();
+                        CollectionReference users =
+                            FirebaseFirestore.instance
+                                .collection('users');
+                        Map<String, dynamic> dataUsers = {
+                          'email': _ctrlEmail.text.toString(),
+                          'nama': _ctrlNama.text,
+                        };
+                        users.add(dataUsers);
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => flutixgenre()));
                       },

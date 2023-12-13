@@ -1,5 +1,6 @@
 // ignore_for_file: camel_case_types, prefer_const_constructors, file_names
 
+import 'package:flutix_uts/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -85,8 +86,8 @@ class _succescheckoutState extends State<succescheckout> {
             children: [
               GestureDetector(
                 onTap: () {
-                  // Navigator.of(context)
-                  //     .push(MaterialPageRoute(builder: (context) => flutixsignup()));
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (context) => homepage()));
                 },
                 child: Text(
                   "Back To Home",

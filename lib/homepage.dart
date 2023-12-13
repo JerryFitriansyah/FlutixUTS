@@ -1,10 +1,13 @@
 import 'package:flutix_uts/models/models.dart';
 import 'package:flutix_uts/moviedetail.dart';
+import 'package:flutix_uts/myticket.dart';
+import 'package:flutix_uts/profile.dart';
 import 'package:flutix_uts/services/services.dart';
 import 'package:flutix_uts/widgets/moviecomingposter.dart';
 import 'package:flutix_uts/widgets/movieposter.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class homepage extends StatefulWidget {
   const homepage({super.key});
@@ -13,10 +16,42 @@ class homepage extends StatefulWidget {
   State<homepage> createState() => _homepageState();
 }
 
+
 class _homepageState extends State<homepage> {
   int _currentIndex = 0;
+  String username = '';
+  String profilePictureUrl = '';
+  int? saldo;
+  List<Movie> movies = [];
+
+  List<Movie> comingSoonMovies = [];
+
 
   @override
+  void initState() {
+    super.initState();
+    loadProfile();
+    updateProfile();
+  }
+
+   Future<void> loadProfile() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      username = prefs.getString('nama') ?? "";
+      profilePictureUrl = prefs.getString('profilePictureUrl') ?? "";
+      saldo = prefs.getInt('saldo');
+    });
+  }
+
+  Future<void> updateProfile() async {
+    await loadProfile();
+  }
+
+  Future<String> _loadProfileImage() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString('profilePictureUrl') ?? "";
+  }
+
   Widget build(BuildContext context) {
     Future<List<Movie>> nowPlaying = Api.getMovies('now_playing', 4);
     Future<List<Movie>> comingSoon = Api.getMovies('upcoming', 4);
@@ -43,12 +78,12 @@ class _homepageState extends State<homepage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "NAMA USER DISINI",
+                      username ?? "Loading...",
                       style: GoogleFonts.raleway(
                           fontSize: 16, fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      "SALDO USER DISINI",
+                      "IDR $saldo",
                       style: GoogleFonts.openSans(
                           fontSize: 14, fontWeight: FontWeight.bold),
                     ),
@@ -84,7 +119,8 @@ class _homepageState extends State<homepage> {
                           itemBuilder: (_, i) {
                             return MoviePoster(
                               //nama widget
-                              movie: movies[i], //movies[i].nama dls
+                              movie: movies[i],
+                              saldo: saldo!, //movies[i].nama dls
                             );
                             // .noRate();
                           },
@@ -144,6 +180,7 @@ class _homepageState extends State<homepage> {
                         itemBuilder: (_, i) {
                           return MovieComingPoster(
                             movie: movies[i],
+                            saldo: saldo!,
                           );
                         },
                         itemCount: movies.length,
@@ -170,15 +207,60 @@ class _homepageState extends State<homepage> {
         currentIndex: _currentIndex,
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.play_circle_fill_rounded),
+            icon: Padding(
+              padding: const EdgeInsets.only(top: 10.0),
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return homepage();
+                      },
+                    ),
+                  );
+                },
+                child: Icon(Icons.play_circle_fill_rounded),
+              ),
+            ),
             label: 'Movies',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.discount_rounded),
+            icon: Padding(
+              padding: const EdgeInsets.only(top: 10.0),
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return myticket();
+                      },
+                    ),
+                  );
+                },
+                child: Icon(Icons.discount_rounded),
+              ),
+            ),
             label: 'My Tickets',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
+            icon: Padding(
+              padding: const EdgeInsets.only(top: 10.0),
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return ProfilPage();
+                      },
+                    ),
+                  );
+                },
+                child: Icon(Icons.person),
+              ),
+            ),
             label: 'Profile',
           ),
         ],

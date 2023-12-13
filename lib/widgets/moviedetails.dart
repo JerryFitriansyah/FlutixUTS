@@ -8,9 +8,10 @@ import 'package:flutix_uts/models/models.dart';
 
 class MovieDetails extends StatelessWidget {
   final Movie movie;
+  int? saldo;
   Color textColor = const Color(0xFFF4EDE6);
 
-  MovieDetails({Key? key, required this.movie}) : super(key: key);
+  MovieDetails({Key? key, required this.movie, required this.saldo}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,16 +20,6 @@ class MovieDetails extends StatelessWidget {
     bool hasHalfStar = (rating - fullStars) > 0;
 
     return InkWell(
-      // onTap: () {
-      //   Navigator.push(
-      //     context,
-      //     MaterialPageRoute(
-      //       builder: (context) {
-      //         return const BottomNav();
-      //       },
-      //     ),
-      //   );
-      // },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -181,6 +172,7 @@ class MovieDetails extends StatelessWidget {
                         MaterialPageRoute(
                           builder: (context) {
                             return selectplace(
+                              saldo: saldo,
                               movie: movie,
                             );
                           },

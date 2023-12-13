@@ -7,9 +7,10 @@ import 'package:flutix_uts/models/models.dart';
 
 class MoviePoster extends StatelessWidget {
   final Movie movie;
+  int saldo;
   Color textColor = const Color(0xFFF4EDE6);
 
-  MoviePoster({Key? key, required this.movie}) : super(key: key);
+  MoviePoster({Key? key, required this.movie, required this.saldo}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +24,7 @@ class MoviePoster extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) {
-              return movie_details(movie: movie);
+              return movie_details(movie: movie, saldo: saldo);
             },
           ),
         );

@@ -5,9 +5,15 @@ import 'package:google_fonts/google_fonts.dart';
 
 class selectseat extends StatefulWidget {
   
-    Movie movies;
+  Movie movie;
+  int saldo;
 
-  selectseat({super.key, required this.movies});
+  selectseat({Key? key, required this.movie, required this.namaJam, required this.saldo, required this.namaHari, required this.namaBioskop}) : super(key: key);
+  
+  String namaBioskop;
+  String namaJam;
+  String namaHari;
+  
 
   @override
   State<selectseat> createState() => _selectseatState();
@@ -187,8 +193,23 @@ class _selectseatState extends State<selectseat> {
               ),
               GestureDetector(
                 onTap: () {
+                  selectedSeats.clear(); // Clear existing selections
+                      for (int i = 0; i < seatStatus.length; i++) {
+                        for (int j = 0; j < seatStatus[i].length; j++) {
+                          if (seatStatus[i][j]) {
+                            selectedSeats.add(
+                                String.fromCharCode('H'.codeUnitAt(0) - i) +
+                                    (6 - j).toString());
+                          }
+                        }
+                      }
                   Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (context) => checkoutScreen1(movies: widget.movies)));
+                      .push(MaterialPageRoute(builder: (context) => checkoutScreen1(namaBioskop: widget.namaBioskop,
+                                  namaJam: widget.namaJam,
+                                  namaHari: widget.namaHari,
+                                  selectedSeats: selectedSeats,
+                                  saldo: widget.saldo,
+                                  movies: widget.movie,)));
                 },
                 child: Padding(
                   padding: const EdgeInsets.only(

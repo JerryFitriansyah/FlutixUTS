@@ -1,360 +1,251 @@
-import 'package:flutter/material.dart';
+// ignore_for_file: prefer_const_constructors
 
-class EditProfile extends StatelessWidget {
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../../models/models.dart';
+
+class EditProfile extends StatefulWidget {
+  const EditProfile({super.key});
+
+  @override
+  State<EditProfile> createState() => _EditProfileState();
+}
+
+class _EditProfileState extends State<EditProfile> {
+  final _formKey = GlobalKey<FormState>();
+  bool _loading = false;
+
+  //Profile? user;
+  String username = '';
+  String email = '';
+  String profilePictureUrl = '';
+  String oldPass = "";
+  String newPass = "";
+
+  @override
+  void initState() {
+    super.initState();
+    loadProfile();
+  }
+
+  Future<void> loadProfile() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      username = prefs.getString('nama') ?? "";
+      email = prefs.getString('email') ?? "";
+      oldPass = prefs.getString('password') ?? "";
+      newPass = prefs.getString(_controllerNewPass.text) ?? "";
+
+      profilePictureUrl = prefs.getString('profilePictureUrl') ?? "";
+    });
+  }
+
+  Future<String> _loadProfileImage() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString('profilePictureUrl') ?? "";
+  }
+
+  final TextEditingController _controllerNama = TextEditingController();
+  final TextEditingController _controllerEmail = TextEditingController();
+  final TextEditingController _controllerOldPass = TextEditingController();
+  final TextEditingController _controllerNewPass = TextEditingController();
+
+  handleSubmit() async {
+    if (_formKey.currentState!.validate()) {
+      final nama = _controllerNama.value.text;
+      final email = _controllerEmail.value.text;
+      final password = _controllerNewPass.value.text;
+
+      setState(() => _loading = true);
+
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          width: 364,
-          height: 680,
-          clipBehavior: Clip.antiAlias,
-          decoration: BoxDecoration(color: Colors.white),
-          child: Stack(
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        leading: Padding(
+          padding: const EdgeInsets.only(top: 10.0, left: 20),
+          child: InkWell(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: Icon(
+              Icons.arrow_back_rounded,
+              color: Color.fromARGB(255, 111, 11, 225),
+              size: 32,
+            ),
+          ),
+        ),
+        title: Padding(
+          padding: const EdgeInsets.only(top: 10.0),
+          child: Text(
+            "Edit Profile",
+            style: GoogleFonts.raleway(
+                color: Colors.black, fontWeight: FontWeight.bold, fontSize: 20),
+          ),
+        ),
+      ),
+      body: ListView(
+        children: [
+          Column(
             children: [
-              Positioned(
-                left: 67,
-                top: 598,
-                child: Container(
-                  width: 230,
-                  height: 40,
-                  clipBehavior: Clip.antiAlias,
-                  decoration: ShapeDecoration(
-                    color: Color(0xFF6750A4),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(100),
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  children: [
+                    FutureBuilder<String>(
+                      future:
+                          _loadProfileImage(), // Panggil fungsi di dalam HomePage
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return const CircularProgressIndicator(
+                            color: Color.fromARGB(255, 247, 234, 60),
+                          );
+                        } else if (snapshot.hasData) {
+                          final profilePictureUrl = snapshot.data!;
+                          return Icon(
+                            Icons.person_2_rounded,
+                            size: 100,
+                          );
+                        } else {
+                          return Icon(
+                            Icons.person_2_rounded,
+                            size: 100,
+                          );
+                        }
+                      },
                     ),
-                  ),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        child: Container(
-                          width: double.infinity,
-                          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                'Update Now',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 14,
-                                  fontFamily: 'Raleway',
-                                  fontWeight: FontWeight.w500,
-                                  height: 0.10,
-                                  letterSpacing: 0.10,
-                                ),
+                    Padding(
+                        padding:
+                            const EdgeInsets.only(top: 40, left: 20, right: 20),
+                        child: TextFormField(
+                          controller: _controllerNama,
+                          decoration: InputDecoration(
+                            border:
+                                OutlineInputBorder(borderSide: BorderSide()),
+                            labelText: "Full Name",
+                            labelStyle:
+                                GoogleFonts.raleway(color: Colors.black),
+                            hintText: username ?? "Loading...",
+                            hintStyle: GoogleFonts.raleway(color: Colors.black),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.grey,
+                                width: 3,
                               ),
-                            ],
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color.fromARGB(255, 247, 234, 60),
+                                width: 3,
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 132,
-                top: 83,
-                child: Container(
-                  width: 95,
-                  height: 94,
-                  decoration: ShapeDecoration(
-                    color: Color(0xFFD9D9D9),
-                    shape: OvalBorder(),
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 130,
-                top: 30,
-                child: Text(
-                  'Edit Profile',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 20,
-                    fontFamily: 'Raleway',
-                    fontWeight: FontWeight.w400,
-                    height: 0,
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 46,
-                top: 201,
-                child: Text(
-                  'Full Name',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 20,
-                    fontFamily: 'Raleway',
-                    fontWeight: FontWeight.w400,
-                    height: 0,
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 39,
-                top: 304,
-                child: Text(
-                  'Email Adress',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 20,
-                    fontFamily: 'Raleway',
-                    fontWeight: FontWeight.w400,
-                    height: 0,
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 39,
-                top: 397,
-                child: Text(
-                  'Password',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 20,
-                    fontFamily: 'Raleway',
-                    fontWeight: FontWeight.w400,
-                    height: 0,
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 40,
-                top: 486,
-                child: Text(
-                  'Confirm Password',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 20,
-                    fontFamily: 'Raleway',
-                    fontWeight: FontWeight.w400,
-                    height: 0,
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 30,
-                top: 238,
-                child: Container(
-                  width: 310,
-                  height: 42,
-                  decoration: ShapeDecoration(
-                    color: Color(0xFFD9D9D9),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 30,
-                top: 341,
-                child: Container(
-                  width: 310,
-                  height: 42,
-                  decoration: ShapeDecoration(
-                    color: Color(0xFFD9D9D9),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 30,
-                top: 430,
-                child: Container(
-                  width: 310,
-                  height: 42,
-                  decoration: ShapeDecoration(
-                    color: Color(0xFFD9D9D9),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 30,
-                top: 521,
-                child: Container(
-                  width: 310,
-                  height: 42,
-                  decoration: ShapeDecoration(
-                    color: Color(0xFFD9D9D9),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 46,
-                top: 249,
-                child: Text(
-                  'Type here.....',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 14,
-                    fontFamily: 'Raleway',
-                    fontWeight: FontWeight.w500,
-                    height: 0.10,
-                    letterSpacing: 0.10,
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 45,
-                top: 352,
-                child: Text(
-                  'Type here....',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 14,
-                    fontFamily: 'Raleway',
-                    fontWeight: FontWeight.w500,
-                    height: 0.10,
-                    letterSpacing: 0.10,
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 46,
-                top: 532,
-                child: Text(
-                  'Type here....',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 14,
-                    fontFamily: 'Raleway',
-                    fontWeight: FontWeight.w500,
-                    height: 0.10,
-                    letterSpacing: 0.10,
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 48,
-                top: 441,
-                child: Text(
-                  'Type here....',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 14,
-                    fontFamily: 'Raleway',
-                    fontWeight: FontWeight.w500,
-                    height: 0.10,
-                    letterSpacing: 0.10,
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 132,
-                top: 83,
-                child: Container(
-                  width: 95.08,
-                  height: 94.17,
-                  decoration: ShapeDecoration(
-                    image: DecorationImage(
-                      image: NetworkImage("https://via.placeholder.com/95x94"),
-                      fit: BoxFit.fill,
-                    ),
-                    shape: OvalBorder(),
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 167,
-                top: 164,
-                child: Container(
-                  width: 25,
-                  height: 25,
-                  decoration: ShapeDecoration(
-                    color: Color(0xFFD9D9D9),
-                    shape: OvalBorder(
-                      side: BorderSide(width: 1, color: Color(0xFF51FD00)),
-                    ),
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 30,
-                top: 27,
-                child: Container(
-                  width: 30,
-                  height: 30,
-                  padding: const EdgeInsets.symmetric(horizontal: 2.50, vertical: 4.38),
-                  clipBehavior: Clip.antiAlias,
-                  decoration: BoxDecoration(),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                    
-                    ],
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 0,
-                top: 0,
-                child: Container(
-                  width: 364,
-                  height: 22.90,
-                  child: Stack(
-                    children: [
-                      Positioned(
-                        left: 0,
-                        top: 0,
-                        child: Opacity(
-                          opacity: 0.30,
-                          child: Container(
-                            width: 364,
-                            height: 22.90,
-                            decoration: BoxDecoration(color: Color(0xFFAA9D9D)),
+                        )),
+                    Padding(
+                        padding:
+                            const EdgeInsets.only(top: 30, left: 20, right: 20),
+                        child: TextFormField(
+                          controller: _controllerEmail,
+                          decoration: InputDecoration(
+                            enabled: false,
+                            border:
+                                OutlineInputBorder(borderSide: BorderSide()),
+                            hintText: email ?? "Loading...",
+                            hintStyle: GoogleFonts.raleway(color: Colors.black),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.grey,
+                                width: 3,
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color.fromARGB(255, 247, 234, 60),
+                                width: 3,
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                      Positioned(
-                        left: 299.09,
-                        top: 6.15,
-                        child: SizedBox(
-                          width: 39.95,
-                          height: 11.41,
-                          child: Text(
-                            '16:20',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 16,
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.w500,
-                              height: 0.09,
+                        )),
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(top: 30, left: 20, right: 20),
+                      child: TextFormField(
+                        controller: _controllerOldPass,
+                        obscureText: true,
+                        decoration: InputDecoration(
+                          enabled: false,
+                          border: OutlineInputBorder(borderSide: BorderSide()),
+                          hintText: "********",
+                          hintStyle: GoogleFonts.raleway(color: Colors.black),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.grey,
+                              width: 3,
+                            ),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Color.fromARGB(255, 247, 234, 60),
+                              width: 3,
                             ),
                           ),
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(50.0),
+                      child: ElevatedButton(
+                        onPressed: () async {
+                            FirebaseFirestore firestore =
+                                FirebaseFirestore.instance;
+                            CollectionReference users =
+                                firestore.collection('users');
+                            User? user = FirebaseAuth.instance.currentUser;
+
+                            //handleSubmit();
+                            String id = FirebaseAuth.instance.currentUser!.uid;
+                            await users.doc(id).update({
+                              "fullName": _controllerNama.text.isEmpty
+                                  ? user!.displayName ?? ""
+                                  : _controllerNama.text.toString(),
+                            });
+
+                            Navigator.of(context).pop();
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Color.fromARGB(255, 111, 11, 225),
+                          foregroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          minimumSize: Size(200, 50),
+                        ),
+                        child: Text(
+                          "Update Now",
+                          style: GoogleFonts.raleway(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],
-          ),
-        ),
-      ],
+          )
+        ],
+      ),
     );
   }
 }

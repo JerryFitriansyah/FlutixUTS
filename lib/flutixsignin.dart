@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, camel_case_types
 
+import 'package:flutix_uts/auth/auth.dart';
 import 'package:flutix_uts/flutixsignup.dart';
+import 'package:flutix_uts/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -27,10 +29,10 @@ class _flutixsigninState extends State<flutixsignin> {
       setState(() => _loading = true);
 
       try {
-        // await Auth().login(email, password);
-        // Navigator.of(context).push(
-        //   MaterialPageRoute(builder: (context) => BottomNav()),
-        // );
+        await Auth().login(email, password);
+        Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => homepage()),
+        );
       } catch (error) {
         print('Error during login: $error');
 
@@ -184,8 +186,8 @@ class _flutixsigninState extends State<flutixsignin> {
                         ),
                       )
                     : Padding(
-                        padding: const EdgeInsets.only(
-                            left: 95, top: 80, right: 20),
+                        padding:
+                            const EdgeInsets.only(left: 95, top: 80, right: 20),
                         child: Icon(
                           Icons.arrow_circle_right_outlined,
                           color: Color.fromARGB(255, 111, 11, 225),
@@ -198,7 +200,7 @@ class _flutixsigninState extends State<flutixsignin> {
           Row(
             children: [
               Padding(
-                padding: const EdgeInsets.only(left: 80, top: 80),
+                padding: const EdgeInsets.only(left: 80, top: 50),
                 child: Text(
                   "Start Account?",
                   style: GoogleFonts.raleway(
@@ -210,11 +212,11 @@ class _flutixsigninState extends State<flutixsignin> {
               ),
               GestureDetector(
                 onTap: () {
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (context) => flutixsignup()));
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => flutixsignup()));
                 },
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 10, top: 80, right: 20),
+                  padding: const EdgeInsets.only(left: 10, top: 50, right: 20),
                   child: Text(
                     "Sign Up",
                     style: GoogleFonts.raleway(
