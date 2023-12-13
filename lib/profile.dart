@@ -66,12 +66,12 @@ class _ProfilePageState extends State<ProfilPage> {
                         } else if (snapshot.hasData) {
                           final profilePictureUrl = snapshot.data!;
                           return Icon(
-                            Icons.person_2_rounded,
+                            Icons.person_4_outlined,
                             size: 100,
                           );
                         } else {
                           return Icon(
-                            Icons.person_2_rounded,
+                            Icons.person_4_outlined,
                             size: 100,
                           );
                         }
@@ -91,7 +91,7 @@ class _ProfilePageState extends State<ProfilPage> {
                     Row(
                       children: [
                         IconButton(
-                            onPressed: () {}, icon: Icon(Icons.settings)),
+                            onPressed: () {}, icon: Icon(Icons.settings_applications)),
                         TextButton(
                             onPressed: () {
                               Navigator.push(
@@ -110,7 +110,7 @@ class _ProfilePageState extends State<ProfilPage> {
                     ),
                     Row(
                       children: [
-                        IconButton(onPressed: () {}, icon: Icon(Icons.wallet)),
+                        IconButton(onPressed: () {}, icon: Icon(Icons.wallet_rounded)),
                         TextButton(
                             onPressed: () {
                               Navigator.push(
@@ -130,7 +130,7 @@ class _ProfilePageState extends State<ProfilPage> {
                     Row(
                       children: [
                         IconButton(
-                            onPressed: () {}, icon: Icon(Icons.language)),
+                            onPressed: () {}, icon: Icon(Icons.language_rounded)),
                         TextButton(
                             onPressed: () {},
                             style: TextButton.styleFrom(
@@ -144,7 +144,7 @@ class _ProfilePageState extends State<ProfilPage> {
                     Row(
                       children: [
                         IconButton(
-                            onPressed: () {}, icon: Icon(Icons.help_center)),
+                            onPressed: () {}, icon: Icon(Icons.help_center_outlined)),
                         TextButton(
                             onPressed: () {},
                             style: TextButton.styleFrom(
@@ -158,7 +158,7 @@ class _ProfilePageState extends State<ProfilPage> {
                     Row(
                       children: [
                         IconButton(
-                            onPressed: () {}, icon: Icon(Icons.rate_review)),
+                            onPressed: () {}, icon: Icon(Icons.rate_review_sharp)),
                         TextButton(
                             onPressed: () {},
                             style: TextButton.styleFrom(
