@@ -28,6 +28,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  awesome_snackbar_content: ^0.1.3
   cloud_firestore: ^4.13.6
   cupertino_icons: ^1.0.2
   firebase_auth: ^4.13.0
@@ -59,6 +60,11 @@ flutter:
     - assets/smallflutixlogo.png
     - assets/promo.jpg
     - assets/barcode.jpg
+    - assets/action.png
+    - assets/battle.png
+    - assets/scifi.png
+    - assets/kids.png
+    - assets/wallet.png
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see

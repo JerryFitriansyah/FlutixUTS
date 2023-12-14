@@ -65,7 +65,7 @@ class _flutixgenreState extends State<flutixgenre> {
                   child: Container(
                     width: 150,
                     height: 100,
-                    color: Colors.black,
+                    color: Colors.grey,
                     child: Center(
                       child: Text(
                         "Horror",
@@ -82,7 +82,7 @@ class _flutixgenreState extends State<flutixgenre> {
                   child: Container(
                     width: 150,
                     height: 100,
-                    color: Colors.black,
+                    color: Colors.grey,
                     child: Center(
                       child: Text(
                         "Music",
@@ -103,7 +103,7 @@ class _flutixgenreState extends State<flutixgenre> {
                   child: Container(
                     width: 150,
                     height: 100,
-                    color: Colors.black,
+                    color: Colors.grey,
                     child: Center(
                       child: Text(
                         "Action",
@@ -120,7 +120,7 @@ class _flutixgenreState extends State<flutixgenre> {
                   child: Container(
                     width: 150,
                     height: 100,
-                    color: Colors.black,
+                    color: Colors.grey,
                     child: Center(
                       child: Text(
                         "Drama",
@@ -141,7 +141,7 @@ class _flutixgenreState extends State<flutixgenre> {
                   child: Container(
                     width: 150,
                     height: 100,
-                    color: Colors.black,
+                    color: Colors.grey,
                     child: Center(
                       child: Text(
                         "Adventure",
@@ -158,7 +158,7 @@ class _flutixgenreState extends State<flutixgenre> {
                   child: Container(
                     width: 150,
                     height: 100,
-                    color: Colors.black,
+                    color: Colors.grey,
                     child: Center(
                       child: Text(
                         "Crime",
@@ -199,7 +199,7 @@ class _flutixgenreState extends State<flutixgenre> {
                   child: Container(
                     width: 150,
                     height: 100,
-                    color: Colors.black,
+                    color: Colors.grey,
                     child: Center(
                       child: Text(
                         "Indonesia",
@@ -216,7 +216,7 @@ class _flutixgenreState extends State<flutixgenre> {
                   child: Container(
                     width: 150,
                     height: 100,
-                    color: Colors.black,
+                    color: Colors.grey,
                     child: Center(
                       child: Text(
                         "English",
@@ -237,7 +237,7 @@ class _flutixgenreState extends State<flutixgenre> {
                   child: Container(
                     width: 150,
                     height: 100,
-                    color: Colors.black,
+                    color: Colors.grey,
                     child: Center(
                       child: Text(
                         "Korean",
@@ -254,7 +254,7 @@ class _flutixgenreState extends State<flutixgenre> {
                   child: Container(
                     width: 150,
                     height: 100,
-                    color: Colors.black,
+                    color: Colors.grey,
                     child: Center(
                       child: Text(
                         "Japanese",

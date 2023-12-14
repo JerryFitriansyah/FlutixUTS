@@ -62,49 +62,45 @@ class _myWalletState extends State<myWallet> {
             body: ListView(
               padding: const EdgeInsets.all(20.0),
               children: [
-                Container(
-                  child: Stack(
-                    children: [
-                      ColorFiltered(
-                        colorFilter: ColorFilter.mode(
-                          Colors.black.withOpacity(0.4),
-                          BlendMode.darken,
-                        ),
-                        child: Container(
-                          width: 320,
-                          height: 150,
+                Center(
+                  child: Container(
+                    child: Stack(
+                      children: [
+                        Container(
+                          width: 300,
+                          height: 190,
                           child: Image.asset(
-                            "assets/images/wallet/wallet.png",
+                            "assets/wallet.png",
                             fit: BoxFit.contain,
                           ),
                         ),
-                      ),
-                      Positioned(
-                        top: 90,
-                        left: 20,
-                        child: Text(
-                          "IDR $saldo",
-                          style: GoogleFonts.openSans(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                        Positioned(
+                          top: 115,
+                          left: 20,
+                          child: Text(
+                            "IDR $saldo",
+                            style: GoogleFonts.openSans(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
                           ),
                         ),
-                      ),
-                      Positioned(
-                        top: 115,
-                        left: 20,
-                        bottom: 20,
-                        child: Text(
-                          "Available Balance",
-                          style: GoogleFonts.raleway(
-                            fontSize: 16,
-                            fontWeight: FontWeight.normal,
-                            color: Colors.white,
+                        Positioned(
+                          top: 140,
+                          left: 20,
+                          bottom: 20,
+                          child: Text(
+                            "Current Available",
+                            style: GoogleFonts.raleway(
+                              fontSize: 16,
+                              fontWeight: FontWeight.normal,
+                              color: Colors.white,
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
                 SizedBox(height: 20),
@@ -113,8 +109,15 @@ class _myWalletState extends State<myWallet> {
                   style: GoogleFonts.raleway(
                       fontSize: 18, fontWeight: FontWeight.bold),
                 ),
-                //HistoryTopUpList(id: id),
-                SizedBox(height: 20),
+                SizedBox(height: 30),
+                Center(
+                  child: Text(
+                    "Harusnya disini History TopUp User",
+                    style: GoogleFonts.raleway(
+                        fontSize: 16, fontWeight: FontWeight.normal),
+                  ),
+                ),
+                SizedBox(height: 30),
                 Center(
                   child: ElevatedButton(
                     onPressed: () {

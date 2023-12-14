@@ -1,5 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutix_uts/homepage.dart';
 import 'package:flutix_uts/profile.dart';
 import 'package:flutix_uts/ticketdetail.dart';

@@ -1,6 +1,5 @@
 // ignore_for_file: camel_case_types, prefer_const_constructors, prefer_const_literals_to_create_immutables
 
-import 'package:flutix_uts/myticket.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -56,9 +55,14 @@ class _detailTicketState extends State<detailTicket> {
                 child: Column(
                   children: [
                     Container(
-                      width: 300,
-                      height: 150,
-                      color: Colors.grey,
+                      width: 290,
+                      height: 220,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage("assets/flutixlogo.png"),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
                     ),
                     SizedBox(height: 5.0),
                     Text("Judul Movie",
@@ -131,10 +135,13 @@ class _detailTicketState extends State<detailTicket> {
                     ),
                     SizedBox(height: 15),
                     Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text("Name",
                                     style: TextStyle(
@@ -142,7 +149,7 @@ class _detailTicketState extends State<detailTicket> {
                                         fontSize: 14,
                                         fontWeight: FontWeight.normal)),
                                 // Spacer(),
-                                Text("(nama)",
+                                Text("Nama User yang sedang Login",
                                     style: TextStyle(
                                         color: Colors.black,
                                         fontSize: 14,
@@ -151,6 +158,7 @@ class _detailTicketState extends State<detailTicket> {
                             ),
                             SizedBox(height: 15),
                             Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text("Price",
                                     style: TextStyle(
@@ -158,7 +166,7 @@ class _detailTicketState extends State<detailTicket> {
                                         fontSize: 14,
                                         fontWeight: FontWeight.normal)),
                                 // Spacer(),
-                                Text("Rp",
+                                Text("Nominal Harga Keseluruhan",
                                     style: TextStyle(
                                         color: Colors.black,
                                         fontSize: 14,
@@ -169,10 +177,10 @@ class _detailTicketState extends State<detailTicket> {
                         ),
                         Spacer(),
                         Container(
-                          width: 60,
-                          height: 60,
-                          child: Image.asset(
-                              "assets/barcode.jpg",
+                          width: 90,
+                          height: 90,
+                          margin: EdgeInsets.only(top: 5),
+                          child: Image.asset("assets/barcode.jpg",
                               fit: BoxFit.fill),
                         ),
                       ],

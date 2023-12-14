@@ -1,6 +1,7 @@
 // ignore_for_file: camel_case_types, prefer_const_constructors, file_names
 
 import 'package:flutix_uts/homepage.dart';
+import 'package:flutix_uts/myticket.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -57,11 +58,11 @@ class _succescheckoutState extends State<succescheckout> {
           SizedBox(height: 50),
           ElevatedButton(
             onPressed: () {
-              // Navigator.of(context).push(
-              //   MaterialPageRoute(
-              //     builder: (context) => flutixsignin(),
-              //   ),
-              // );
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => myticket(),
+                ),
+              );
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: Color.fromARGB(255, 111, 11, 225),

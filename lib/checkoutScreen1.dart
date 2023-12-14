@@ -455,18 +455,12 @@ class _checkoutScreen1State extends State<checkoutScreen1> {
                       padding: EdgeInsets.only(
                           right: 20, top: 50, bottom: 40, left: 105),
                       child: Icon(
-                        widget.saldo >=
-                                calculateTotal(widget.selectedSeats.length)
-                            ? Icons.arrow_circle_right_outlined
-                            : Icons.account_balance_wallet_rounded,
+                        Icons.arrow_circle_right_outlined,
                         color: widget.saldo >=
                                 calculateTotal(widget.selectedSeats.length)
                             ? Color.fromARGB(255, 111, 11, 225)
                             : Colors.red,
-                        size: widget.saldo >=
-                                calculateTotal(widget.selectedSeats.length)
-                            ? 60
-                            : 40,
+                        size: 40,
                       ),
                     ),
                   ),

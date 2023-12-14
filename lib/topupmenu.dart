@@ -23,16 +23,6 @@ DateTime dateTime = timestamp.toDate();
 // Memformat DateTime menjadi string sesuai kebutuhan
 String formattedDate = DateFormat('MMMM d, y h:mm:ss a').format(dateTime);
 
-// class topupmenu{
-//   int harga;
-
-//   topupmenu(this.harga);
-// }
-
-// List<topupmenu> TopUp =[
-
-// ]
-
 class _topupmenuState extends State<topupmenu> {
   TextEditingController _controller = TextEditingController();
   int currentBalance = 0;
@@ -140,8 +130,8 @@ class _topupmenuState extends State<topupmenu> {
                               width: 20,
                               decoration: BoxDecoration(
                                 color: _controller.text == template[index]
-                                    ? Colors.black
-                                    : Colors.grey,
+                                    ? Color.fromARGB(255, 247, 234, 60)
+                                    : Colors.black87,
                                 borderRadius: BorderRadius.circular(5),
                               ),
                               child: Column(

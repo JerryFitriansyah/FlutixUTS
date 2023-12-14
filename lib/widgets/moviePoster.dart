@@ -59,7 +59,6 @@ class MoviePoster extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(height: 5),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -81,9 +80,8 @@ class MoviePoster extends StatelessWidget {
                         color: textColor,
                         size: 17,
                       ),
-                    const SizedBox(width: 5),
                     Text(
-                      "${movie.rate.toStringAsFixed(1)}/10",
+                      "${movie.rate.toStringAsFixed(0)}/10",
                       style: GoogleFonts.openSans(
                         fontWeight: FontWeight.bold,
                         fontSize: 15,

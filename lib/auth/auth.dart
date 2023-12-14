@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutix_uts/flutixgenre.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Auth {
@@ -74,31 +73,6 @@ class Auth {
       rethrow;
     }
   }
-
-  // Fungsi untuk menyimpan preferensi ke Firestore
-  // Future<void> savePreferences(
-  //     List<MovieGenre> genrePref, List<MovieLanguage> languagePref) async {
-  //   try {
-  //     // Ambil user saat ini
-  //     User? user = _auth.currentUser;
-
-  //     if (user != null) {
-  //       // Menyimpan preferensi ke Firestore di koleksi users
-  //       await _firestore.collection('users').doc(user.uid).update({
-  //         'genrePref': genrePref
-  //             .map((genre) => genre.toString().split('.').last)
-  //             .toList(),
-  //         'languagePref': languagePref
-  //             .map((language) => language.toString().split('.').last)
-  //             .toList(),
-  //       });
-  //     } else {
-  //       throw Exception("User not signed in.");
-  //     }
-  //   } catch (error) {
-  //     rethrow;
-  //   }
-  // }
 
   // Fungsi untuk mendapatkan preferensi dari Firestore
   Future<Map<String, dynamic>> getPreferences(String userId) async {

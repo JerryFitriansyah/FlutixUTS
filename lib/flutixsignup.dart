@@ -32,7 +32,7 @@ class _flutixsignupState extends State<flutixsignup> {
 
       try {
         // // Registrasi pengguna
-        await Auth().regis(email, password, nama, 200000);
+        await Auth().regis(email, password, nama, 0);
 
         Navigator.of(context).push(
           MaterialPageRoute(builder: (context) => flutixgenre()),

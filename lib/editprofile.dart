@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -192,7 +190,6 @@ class _EditProfileState extends State<EditProfile> {
                             color: Color.fromARGB(255, 247, 234, 60),
                           );
                         } else if (snapshot.hasData) {
-                          final profilePictureUrl = snapshot.data!;
                           return Icon(
                             Icons.person_2_rounded,
                             size: 100,

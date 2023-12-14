@@ -96,7 +96,7 @@ class MovieDetails extends StatelessWidget {
                 ),
               const SizedBox(width: 5),
               Text(
-                "${movie.rate.toStringAsFixed(1)}/10",
+                "${movie.rate.toStringAsFixed(0)}/10",
                 style: GoogleFonts.openSans(
                   fontWeight: FontWeight.normal,
                   fontSize: 14,
@@ -185,12 +185,12 @@ class MovieDetails extends StatelessWidget {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(40.0),
                       ),
-                      minimumSize: const Size(200, 50),
+                      minimumSize: const Size(250, 50),
                     ),
                     child: Text(
                       "Continue to Book",
                       style: GoogleFonts.raleway(
-                        fontSize: 16,
+                        fontSize: 14,
                         fontWeight: FontWeight.bold,
                       ),
                     ),

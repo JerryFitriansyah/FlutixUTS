@@ -1,5 +1,4 @@
 import 'package:flutix_uts/models/models.dart';
-import 'package:flutix_uts/moviedetail.dart';
 import 'package:flutix_uts/myticket.dart';
 import 'package:flutix_uts/profile.dart';
 import 'package:flutix_uts/services/services.dart';
@@ -16,7 +15,6 @@ class homepage extends StatefulWidget {
   State<homepage> createState() => _homepageState();
 }
 
-
 class _homepageState extends State<homepage> {
   int _currentIndex = 0;
   String username = '';
@@ -26,7 +24,6 @@ class _homepageState extends State<homepage> {
 
   List<Movie> comingSoonMovies = [];
 
-
   @override
   void initState() {
     super.initState();
@@ -34,7 +31,7 @@ class _homepageState extends State<homepage> {
     updateProfile();
   }
 
-   Future<void> loadProfile() async {
+  Future<void> loadProfile() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
       username = prefs.getString('nama') ?? "";
@@ -63,13 +60,9 @@ class _homepageState extends State<homepage> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Container(
-                  width: 70,
-                  height: 70,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.black,
-                  ),
+                Icon(
+                  Icons.person_4_rounded,
+                  size: 50,
                 ),
                 const SizedBox(
                   width: 20,
@@ -102,6 +95,7 @@ class _homepageState extends State<homepage> {
                 style: GoogleFonts.raleway(
                     fontSize: 18, fontWeight: FontWeight.bold),
               ),
+              SizedBox(height: 10,),
               FutureBuilder<List<Movie>>(
                   future: nowPlaying,
                   builder: (context, snapshot) {
@@ -113,7 +107,6 @@ class _homepageState extends State<homepage> {
                       final movies = snapshot.data!;
                       return Container(
                         height: 156,
-                        padding: const EdgeInsets.only(left: 20),
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (_, i) {
@@ -137,25 +130,97 @@ class _homepageState extends State<homepage> {
                 style: GoogleFonts.raleway(
                     fontSize: 18, fontWeight: FontWeight.bold),
               ),
-              Container(
-                height: 70.0,
-                child: Center(
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: 4,
-                    itemBuilder: (context, index) {
-                      return Container(
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Column(
+                    children: [
+                      Container(
                         width: 65,
-                        margin:
-                            EdgeInsets.only(left: 15.0, top: 8.0, right: 3.0),
+                        height: 65,
+                        margin: EdgeInsets.only(top: 10, right: 10, bottom: 10),
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Colors.black
+                          ),
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                            image: AssetImage("assets/action.png"),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                      Text(
+                        "Action",
+                        style: GoogleFonts.raleway(
+                            fontSize: 16, fontWeight: FontWeight.normal),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Container(
+                        width: 65,
+                        height: 65,
+                        margin: EdgeInsets.only(top: 10, right: 10, bottom: 10),
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: Colors.grey,
+                          image: DecorationImage(
+                            image: AssetImage("assets/battle.png"),
+                            fit: BoxFit.cover,
+                          ),
                         ),
-                      );
-                    },
+                      ),
+                      Text(
+                        "Battle",
+                        style: GoogleFonts.raleway(
+                            fontSize: 16, fontWeight: FontWeight.normal),
+                      ),
+                    ],
                   ),
-                ),
+                  Column(
+                    children: [
+                      Container(
+                        width: 65,
+                        height: 65,
+                        margin: EdgeInsets.only(top: 10, right: 10, bottom: 10),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                            image: AssetImage("assets/scifi.png"),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                      Text(
+                        "Sci-Fi",
+                        style: GoogleFonts.raleway(
+                            fontSize: 16, fontWeight: FontWeight.normal),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Container(
+                        width: 65,
+                        height: 65,
+                        margin: EdgeInsets.only(top: 10, right: 10, bottom: 10),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                            image: AssetImage("assets/kids.png"),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                      Text(
+                        "Kids",
+                        style: GoogleFonts.raleway(
+                            fontSize: 16, fontWeight: FontWeight.normal),
+                      ),
+                    ],
+                  ),
+                ],
               ),
               SizedBox(height: 10),
               Text(
@@ -163,6 +228,7 @@ class _homepageState extends State<homepage> {
                 style: GoogleFonts.raleway(
                     fontSize: 18, fontWeight: FontWeight.bold),
               ),
+              SizedBox(height: 10),
               FutureBuilder<List<Movie>>(
                 future: comingSoon,
                 builder: (context, snapshot) {
@@ -174,7 +240,6 @@ class _homepageState extends State<homepage> {
                     final movies = snapshot.data!;
                     return Container(
                       height: 200,
-                      padding: const EdgeInsets.only(left: 20),
                       child: ListView.builder(
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (_, i) {
@@ -198,7 +263,12 @@ class _homepageState extends State<homepage> {
             child: Container(
               width: 280,
               height: 90,
-              color: Colors.grey
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage("assets/promo.jpg"),
+                  fit: BoxFit.cover,
+                ),
+              ),
             ),
           )
         ]),
@@ -264,9 +334,12 @@ class _homepageState extends State<homepage> {
             label: 'Profile',
           ),
         ],
-        selectedLabelStyle: TextStyle(color: Color.fromARGB(255, 111, 11, 225),),
+        selectedLabelStyle: TextStyle(
+          color: Color.fromARGB(255, 111, 11, 225),
+        ),
         unselectedLabelStyle: TextStyle(color: Colors.grey),
-        selectedIconTheme: IconThemeData(color:  Color.fromARGB(255, 111, 11, 225)),
+        selectedIconTheme:
+            IconThemeData(color: Color.fromARGB(255, 111, 11, 225)),
         unselectedIconTheme: IconThemeData(color: Colors.grey),
         onTap: (index) {
           setState(() {

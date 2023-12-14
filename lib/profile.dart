@@ -64,7 +64,6 @@ class _ProfilePageState extends State<ProfilPage> {
                             color: Color(0xFFE1A20B),
                           );
                         } else if (snapshot.hasData) {
-                          final profilePictureUrl = snapshot.data!;
                           return Icon(
                             Icons.person_4_outlined,
                             size: 100,
