@@ -1,12 +1,15 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
+
+import '../../../models/models.dart';
 
 class EditProfile extends StatefulWidget {
-  const EditProfile({Key? key}) : super(key: key);
+  const EditProfile({super.key});
 
   @override
   State<EditProfile> createState() => _EditProfileState();
@@ -15,14 +18,13 @@ class EditProfile extends StatefulWidget {
 class _EditProfileState extends State<EditProfile> {
   final _formKey = GlobalKey<FormState>();
   bool _loading = false;
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  //Profile? user;
   String username = '';
   String email = '';
   String profilePictureUrl = '';
-  TextEditingController _oldpasswordTextController = TextEditingController();
-  TextEditingController _newpasswordTextController = TextEditingController();
-  final TextEditingController _controllerNama = TextEditingController();
-  final TextEditingController _controllerEmail = TextEditingController();
+  String oldPass = "";
+  String newPass = "";
 
   @override
   void initState() {
@@ -33,115 +35,33 @@ class _EditProfileState extends State<EditProfile> {
   Future<void> loadProfile() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
-      username = prefs.getString('nama') ?? '';
-      email = prefs.getString('email') ?? '';
-      profilePictureUrl = prefs.getString('profilePictureUrl') ?? '';
+      username = prefs.getString('nama') ?? "";
+      email = prefs.getString('email') ?? "";
+      oldPass = prefs.getString('password') ?? "";
+      newPass = prefs.getString(_controllerNewPass.text) ?? "";
+
+      profilePictureUrl = prefs.getString('profilePictureUrl') ?? "";
     });
-  }
-
-  Future<void> _passChange() async {
-    try {
-      var currentUser = _auth.currentUser;
-      if (currentUser != null) {
-        var cred = EmailAuthProvider.credential(
-            email: currentUser.email!,
-            password: _oldpasswordTextController.text);
-        await currentUser.reauthenticateWithCredential(cred);
-        await currentUser.updatePassword(_newpasswordTextController.text);
-
-        final snackBar = SnackBar(
-          elevation: 0,
-          behavior: SnackBarBehavior.floating,
-          backgroundColor: Colors.transparent,
-          content: AwesomeSnackbarContent(
-            title: 'Ubah Kata Sandi Berhasil',
-            message: 'Gunakan kata sandi terbaru untuk masuk',
-            contentType: ContentType.success,
-          ),
-        );
-        ScaffoldMessenger.of(context)
-          ..hideCurrentSnackBar()
-          ..showSnackBar(snackBar);
-      } else {
-        final snackBar = SnackBar(
-          elevation: 0,
-          behavior: SnackBarBehavior.floating,
-          backgroundColor: Colors.transparent,
-          content: AwesomeSnackbarContent(
-            title: 'Pengguna tidak ditemukan',
-            message: '',
-            contentType: ContentType.failure,
-          ),
-        );
-
-        ScaffoldMessenger.of(context)
-          ..hideCurrentSnackBar()
-          ..showSnackBar(snackBar);
-      }
-    } catch (error) {
-      final snackBar = SnackBar(
-        elevation: 0,
-        behavior: SnackBarBehavior.floating,
-        backgroundColor: Colors.transparent,
-        content: AwesomeSnackbarContent(
-          title: 'Ubah Kata Sandi Gagal',
-          message: ' ',
-          contentType: ContentType.failure,
-        ),
-      );
-
-      ScaffoldMessenger.of(context)
-        ..hideCurrentSnackBar()
-        ..showSnackBar(snackBar);
-    } finally {
-      setState(() {
-        _loading = false;
-      });
-    }
-  }
-
-  @override
-  void dispose() {
-    _oldpasswordTextController.dispose();
-    _newpasswordTextController.dispose();
-    super.dispose();
   }
 
   Future<String> _loadProfileImage() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getString('profilePictureUrl') ?? '';
+    return prefs.getString('profilePictureUrl') ?? "";
   }
 
-  void handleSubmit() async {
+  final TextEditingController _controllerNama = TextEditingController();
+  final TextEditingController _controllerEmail = TextEditingController();
+  final TextEditingController _controllerOldPass = TextEditingController();
+  final TextEditingController _controllerNewPass = TextEditingController();
+
+  handleSubmit() async {
     if (_formKey.currentState!.validate()) {
-      setState(() {
-        _loading = true;
-      });
+      final nama = _controllerNama.value.text;
+      final email = _controllerEmail.value.text;
+      final password = _controllerNewPass.value.text;
 
-      try {
-        await _passChange();
+      setState(() => _loading = true);
 
-        if (!_loading) {
-          FirebaseFirestore firestore = FirebaseFirestore.instance;
-          CollectionReference users = firestore.collection('users');
-          User? user = FirebaseAuth.instance.currentUser;
-
-          String id = FirebaseAuth.instance.currentUser!.uid;
-          await users.doc(id).update({
-            'fullName': _controllerNama.text.isEmpty
-                ? user!.displayName ?? ''
-                : _controllerNama.text.toString(),
-          });
-
-          Navigator.of(context).pop();
-        }
-      } catch (error) {
-        // Handle errors
-      } finally {
-        setState(() {
-          _loading = true;
-        });
-      }
     }
   }
 
@@ -167,7 +87,7 @@ class _EditProfileState extends State<EditProfile> {
         title: Padding(
           padding: const EdgeInsets.only(top: 10.0),
           child: Text(
-            'Edit Profile',
+            "Edit Profile",
             style: GoogleFonts.raleway(
                 color: Colors.black, fontWeight: FontWeight.bold, fontSize: 20),
           ),
@@ -182,7 +102,8 @@ class _EditProfileState extends State<EditProfile> {
                 child: Column(
                   children: [
                     FutureBuilder<String>(
-                      future: _loadProfileImage(),
+                      future:
+                          _loadProfileImage(), // Panggil fungsi di dalam HomePage
                       builder: (context, snapshot) {
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {
@@ -190,6 +111,7 @@ class _EditProfileState extends State<EditProfile> {
                             color: Color.fromARGB(255, 247, 234, 60),
                           );
                         } else if (snapshot.hasData) {
+                          final profilePictureUrl = snapshot.data!;
                           return Icon(
                             Icons.person_2_rounded,
                             size: 100,
@@ -210,10 +132,10 @@ class _EditProfileState extends State<EditProfile> {
                           decoration: InputDecoration(
                             border:
                                 OutlineInputBorder(borderSide: BorderSide()),
-                            labelText: 'Nama Lengkap',
+                            labelText: "Full Name",
                             labelStyle:
                                 GoogleFonts.raleway(color: Colors.black),
-                            hintText: username ?? 'Memuat...',
+                            hintText: username ?? "Loading...",
                             hintStyle: GoogleFonts.raleway(color: Colors.black),
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
@@ -238,7 +160,7 @@ class _EditProfileState extends State<EditProfile> {
                             enabled: false,
                             border:
                                 OutlineInputBorder(borderSide: BorderSide()),
-                            hintText: email ?? 'Memuat...',
+                            hintText: email ?? "Loading...",
                             hintStyle: GoogleFonts.raleway(color: Colors.black),
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
@@ -258,12 +180,12 @@ class _EditProfileState extends State<EditProfile> {
                       padding:
                           const EdgeInsets.only(top: 30, left: 20, right: 20),
                       child: TextFormField(
-                        controller: _newpasswordTextController,
-                        obscureText: false,
+                        controller: _controllerOldPass,
+                        obscureText: true,
                         decoration: InputDecoration(
-                          enabled: true,
+                          enabled: false,
                           border: OutlineInputBorder(borderSide: BorderSide()),
-                          hintText: '********',
+                          hintText: "********",
                           hintStyle: GoogleFonts.raleway(color: Colors.black),
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
@@ -283,7 +205,23 @@ class _EditProfileState extends State<EditProfile> {
                     Padding(
                       padding: const EdgeInsets.all(50.0),
                       child: ElevatedButton(
-                        onPressed: handleSubmit,
+                        onPressed: () async {
+                            FirebaseFirestore firestore =
+                                FirebaseFirestore.instance;
+                            CollectionReference users =
+                                firestore.collection('users');
+                            User? user = FirebaseAuth.instance.currentUser;
+
+                            //handleSubmit();
+                            String id = FirebaseAuth.instance.currentUser!.uid;
+                            await users.doc(id).update({
+                              "nama": _controllerNama.text.isEmpty
+                                  ? user!.displayName ?? ""
+                                  : _controllerNama.text.toString(),
+                            });
+
+                            Navigator.of(context).pop();
+                        },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Color.fromARGB(255, 111, 11, 225),
                           foregroundColor: Colors.white,
@@ -293,7 +231,7 @@ class _EditProfileState extends State<EditProfile> {
                           minimumSize: Size(200, 50),
                         ),
                         child: Text(
-                          'Update Profile',
+                          "Update Now",
                           style: GoogleFonts.raleway(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
